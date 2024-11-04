@@ -1,12 +1,19 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import Text from './components/Text.vue'
 import Input from './components/Input.vue'
+
+const secretMessage = ref('');
+
+const updateText = (message: string) => {
+  secretMessage.value = message; 
+};
 </script>
 
 <template>
   <main>
-    <Text />
-    <Input />
+    <Text :secret-text="secretMessage" />
+    <Input @submit="updateText" />
   </main>
 </template>
 
