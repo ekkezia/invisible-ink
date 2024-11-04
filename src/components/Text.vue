@@ -41,10 +41,24 @@ onMounted(addSpansToTextDiv);
 </script>
 
 <template>
+  <div class="container">
   <div class="text"></div>
+</div>
 </template>
 
 <style>
+.container {
+  background: white;
+  padding: 4rem;
+  transform: rotate(5deg);
+  border-radius: 0.1rem;
+  box-shadow: 0px 0px 10px grey;
+  ::selection {
+  background: greenyellow;
+  cursor: url("logo.svg"), url("logo.svg"), default;
+  }
+}
+
 .text {
   font-size: 1.2rem;
   font-weight: 400;
