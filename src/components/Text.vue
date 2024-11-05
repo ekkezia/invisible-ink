@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { TEXT } from './text';
-import { ref, watch, onMounted, defineProps } from 'vue';
+import { onMounted, watch, defineProps } from 'vue';
 
 const props = defineProps({
   secretText: {
@@ -16,21 +16,16 @@ const props = defineProps({
   },
 });
 
-// Use ref for reactivity
-const secretText = ref(props.secretText);
-
 // Function to add spans to text
-const addSpansToTextDiv = () => {
+const addSpansToTextDiv = (text: string) => {
   const container = document.querySelector('.text');
-  let tempText = TEXT; // Ensure TEXT is defined and accessible
-  const secret = "abc"
-  const cleanSecretText = secretText.value.replace(/\s/g, "");
+  let tempText = TEXT;
+  const cleanSecretText = text.replace(/\s/g, "");
 
   console.log('Clean secret text:', cleanSecretText);
   if (container) {
-    container.innerHTML = ""; // Clear the container
+    container.innerHTML = "";
 
-    // Loop through each character in cleanSecretText
     for (let i = 0; i < cleanSecretText.length; i++) {
       const index = tempText.toLowerCase().indexOf(cleanSecretText[i].toLowerCase());
 
@@ -57,14 +52,13 @@ const addSpansToTextDiv = () => {
   }
 };
 
-// Watch for changes to the secretText
-watch(secretText, () => {
-  addSpansToTextDiv();
+// Watch for changes to the secretText prop
+watch(() => props.secretText, () => {
+  addSpansToTextDiv(props.secretText);
 });
 
-// Call the function when the component mounts
 onMounted(() => {
-  addSpansToTextDiv(); // Initial call
+  addSpansToTextDiv("I love you");
 });
 </script>
 
@@ -91,7 +85,6 @@ onMounted(() => {
 .text {
   font-size: 1.2rem;
   font-weight: 400;
-  color: var(--color-heading);
   color: black;
   text-decoration: underline dotted blue;
 }

@@ -1,21 +1,27 @@
 <script setup lang="ts">
-  import { ref, defineEmits } from 'vue';
+import { ref, defineEmits } from 'vue';
 
-  const emit = defineEmits();
+const emit = defineEmits();
 
-  const message = ref('');
+const message = ref('');
 
-  const submitMessage = () => {
-    emit('submit', message.value); 
-    console.log('emitting submit', message.value)
-    message.value = ''; 
-  };
+let containerZIndex = ref(1);
+
+const submitMessage = () => {
+  emit('submit', message.value);
+  // message.value = '';
+  containerZIndex.value = 0;
+};
 </script>
 
 <template>
-  <div class="container">
+  <div class="container" :style="{ zIndex: containerZIndex }">
     <h3>Your Invisible Ink</h3>
-    <input v-model="message" placeholder="Your secret message" />
+    <input
+      v-model="message"
+      @keyup.enter="submitMessage"
+      placeholder="Your secret message"
+    />
     <button @click="submitMessage">↵ Enter</button>
   </div>
 </template>
@@ -30,8 +36,8 @@
   z-index: 0;
   position: absolute;
   ::selection {
-  background: greenyellow;
-  cursor: url("logo.svg"), url("logo.svg"), default;
+    background: greenyellow;
+    cursor: url('logo.svg'), url('logo.svg'), default;
   }
 }
 
@@ -41,8 +47,8 @@ h3 {
   font-family: 'Edu AU VIC WA NT Guides', sans-serif;
   color: black;
   ::selection {
-  color: greenyellow;
-  cursor: url("logo.svg"), url("logo.svg"), default;
+    color: greenyellow;
+    cursor: url('logo.svg'), url('logo.svg'), default;
   }
 }
 
@@ -69,5 +75,4 @@ button {
     color: white;
   }
 }
-
 </style>
