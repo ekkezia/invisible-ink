@@ -12,7 +12,7 @@ const props = defineProps({
   secretText: {
     type: String,
     required: false,
-    default: 'i love you full'
+    default: 'i love you full',
   },
 });
 
@@ -20,25 +20,29 @@ const props = defineProps({
 const addSpansToTextDiv = (text: string) => {
   const container = document.querySelector('.text');
   let tempText = TEXT;
-  const cleanSecretText = text.replace(/\s/g, "");
+  const cleanSecretText = text.replace(/\s/g, '');
 
   console.log('Clean secret text:', cleanSecretText);
   if (container) {
-    container.innerHTML = "";
+    container.innerHTML = '';
 
     for (let i = 0; i < cleanSecretText.length; i++) {
-      const index = tempText.toLowerCase().indexOf(cleanSecretText[i].toLowerCase());
+      const index = tempText
+        .toLowerCase()
+        .indexOf(cleanSecretText[i].toLowerCase());
 
       if (i === cleanSecretText.length - 1) {
         const textNode = document.createTextNode(tempText);
         container.appendChild(textNode);
       } else {
         if (index !== -1) {
-          const textNode = document.createTextNode(tempText.substring(0, index));
+          const textNode = document.createTextNode(
+            tempText.substring(0, index),
+          );
           container.appendChild(textNode);
 
-          const span = document.createElement("span");
-          span.className = "secret";
+          const span = document.createElement('span');
+          span.className = 'secret';
           span.textContent = cleanSecretText[i];
           container.appendChild(span);
 
@@ -53,40 +57,48 @@ const addSpansToTextDiv = (text: string) => {
 };
 
 // Watch for changes to the secretText prop
-watch(() => props.secretText, () => {
-  addSpansToTextDiv(props.secretText);
-});
+watch(
+  () => props.secretText,
+  () => {
+    addSpansToTextDiv(props.secretText);
+  },
+);
 
 onMounted(() => {
-  addSpansToTextDiv("I love you");
+  addSpansToTextDiv('I love you');
 });
 </script>
 
 <style>
 .container {
+  width: 800px;
+  max-width: 80vw;
   background: white;
   padding: 4rem;
-  transform: rotate(5deg);
+  transform: rotate(0deg);
   border-radius: 0.1rem;
   box-shadow: 0px 0px 10px grey;
   z-index: 1;
   position: absolute;
+  top: 10vh;
+  left: 10vw;
   ::selection {
     background: greenyellow;
-    cursor: url("logo.svg"), url("logo.svg"), default;
+    cursor: url('logo.svg'), url('logo.svg'), default;
   }
 }
 
 .container:hover,
 .container:focus {
-  z-index: 2; 
+  z-index: 2;
 }
 
 .text {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 400;
   color: black;
   text-decoration: underline dotted blue;
+  font-family: 'Edu AU VIC WA NT Guides', sans-serif;
 }
 
 .secret {

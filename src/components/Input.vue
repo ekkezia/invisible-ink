@@ -15,7 +15,7 @@ const submitMessage = () => {
 </script>
 
 <template>
-  <div class="container" :style="{ zIndex: containerZIndex }">
+  <div class="input-container" :style="{ zIndex: containerZIndex }">
     <h3>Your Invisible Ink</h3>
     <input
       v-model="message"
@@ -27,7 +27,9 @@ const submitMessage = () => {
 </template>
 
 <style>
-.container {
+.input-container {
+  width: 800px;
+  max-width: 80vw;
   background: white;
   padding: 4rem;
   transform: rotate(5deg);
@@ -35,6 +37,8 @@ const submitMessage = () => {
   box-shadow: 0px 0px 10px grey;
   z-index: 0;
   position: absolute;
+  top: 10vh;
+  left: 10vw;
   ::selection {
     background: greenyellow;
     cursor: url('logo.svg'), url('logo.svg'), default;
@@ -43,9 +47,11 @@ const submitMessage = () => {
 
 h3 {
   font-weight: 700;
+  font-size: 2rem;
   text-emphasis-style: '₊⊹';
   font-family: 'Edu AU VIC WA NT Guides', sans-serif;
   color: black;
+  background-color: white;
   ::selection {
     color: greenyellow;
     cursor: url('logo.svg'), url('logo.svg'), default;

@@ -5,7 +5,7 @@ In the United Kingdom, the name Keziah is now unusual, but it was more common in
 
 Keziah was also used as a female first name in the United States in the nineteenth century. For example, Keziah Brevard ran a plantation in South Carolina in the 1850s and 60s;[5] Keziah Brower lived on farms near Madison, Wisconsin and Vermillion, Dakota Territory (now South Dakota) in the 1850s, 60s, and 70s.[6] H. P. Lovecraft's The Dreams in the Witch House feature a character named Keziah Mason.
 
-The modern name Keisha is derived from this name.[citation needed]
+The modern name Keisha is derived from this name.[citation needed].
 
 `;
 export const SECRET_TEXT = "hi i am me";

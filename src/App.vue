@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import Text from './components/Text.vue'
-import Input from './components/Input.vue'
+import Text from './components/Text.vue';
+import Input from './components/Input.vue';
 
 const secretMessage = ref('');
 
 const updateText = (message: string) => {
-  secretMessage.value = message; 
+  secretMessage.value = message;
 };
 </script>
 
@@ -18,6 +18,14 @@ const updateText = (message: string) => {
 </template>
 
 <style scoped>
+main {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: lightgrey;
+}
 header {
   line-height: 1.5;
 }
