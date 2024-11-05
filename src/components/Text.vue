@@ -16,13 +16,11 @@ const props = defineProps({
   },
 });
 
-// Function to add spans to text
 const addSpansToTextDiv = (text: string) => {
   const container = document.querySelector('.text');
   let tempText = TEXT;
   const cleanSecretText = text.replace(/\s/g, '');
 
-  console.log('Clean secret text:', cleanSecretText);
   if (container) {
     container.innerHTML = '';
 
@@ -31,27 +29,25 @@ const addSpansToTextDiv = (text: string) => {
         .toLowerCase()
         .indexOf(cleanSecretText[i].toLowerCase());
 
-      if (i === cleanSecretText.length - 1) {
-        const textNode = document.createTextNode(tempText);
+      if (index !== -1) {
+        const textNode = document.createTextNode(tempText.substring(0, index));
         container.appendChild(textNode);
+
+        const span = document.createElement('span');
+        span.className = 'secret';
+        span.textContent = cleanSecretText[i];
+        container.appendChild(span);
+
+        tempText = tempText.substring(index + 1);
       } else {
-        if (index !== -1) {
-          const textNode = document.createTextNode(
-            tempText.substring(0, index),
-          );
-          container.appendChild(textNode);
-
-          const span = document.createElement('span');
-          span.className = 'secret';
-          span.textContent = cleanSecretText[i];
-          container.appendChild(span);
-
-          tempText = tempText.substring(index + 1);
-        } else {
-          const unmatchedText = document.createTextNode(cleanSecretText[i]);
-          container.appendChild(unmatchedText);
-        }
+        const unmatchedText = document.createTextNode(cleanSecretText[i]);
+        container.appendChild(unmatchedText);
       }
+    }
+
+    if (tempText.length > 0) {
+      const remainingTextNode = document.createTextNode(tempText);
+      container.appendChild(remainingTextNode);
     }
   }
 };
@@ -80,12 +76,8 @@ onMounted(() => {
   box-shadow: 0px 0px 10px grey;
   z-index: 1;
   position: absolute;
-  top: 10vh;
+  top: 30vh;
   left: 10vw;
-  ::selection {
-    background: greenyellow;
-    cursor: url('logo.svg'), url('logo.svg'), default;
-  }
 }
 
 .container:hover,
@@ -101,9 +93,18 @@ onMounted(() => {
   font-family: 'Edu AU VIC WA NT Guides', sans-serif;
 }
 
+.text::selection {
+  background-color: greenyellow;
+  color: greenyellow;
+}
+
 .secret {
-  background-color: red;
+  background-color: white;
   color: black;
   animation-duration: 500ms;
+}
+
+.secret::selection {
+  background-color: white;
 }
 </style>

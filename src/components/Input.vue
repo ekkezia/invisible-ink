@@ -16,7 +16,11 @@ const submitMessage = () => {
 
 <template>
   <div class="input-container" :style="{ zIndex: containerZIndex }">
-    <h3>Your Invisible Ink</h3>
+    <h3>Your Invisible Ink <span class="highlight"></span></h3>
+    <p>
+      Type your secret message, press [↵ Enter], then reveal it to your loved
+      ones by highlighting the script underneath with your cursor.
+    </p>
     <input
       v-model="message"
       @keyup.enter="submitMessage"
@@ -39,10 +43,6 @@ const submitMessage = () => {
   position: absolute;
   top: 10vh;
   left: 10vw;
-  ::selection {
-    background: greenyellow;
-    cursor: url('logo.svg'), url('logo.svg'), default;
-  }
 }
 
 h3 {
@@ -52,10 +52,19 @@ h3 {
   font-family: 'Edu AU VIC WA NT Guides', sans-serif;
   color: black;
   background-color: white;
-  ::selection {
-    color: greenyellow;
-    cursor: url('logo.svg'), url('logo.svg'), default;
-  }
+}
+
+h3::selection {
+  background-color: greenyellow;
+  color: greenyellow;
+}
+
+p {
+  font-family: Courier;
+  font-size: 0.9rem;
+  line-height: 1;
+  margin: 1rem 0;
+  color: grey;
 }
 
 input {
@@ -65,6 +74,11 @@ input {
   color: black;
   text-decoration: underline dotted blue;
   border: none;
+  font-family: 'Edu AU VIC WA NT Guides', sans-serif;
+}
+
+input::selection {
+  background-color: greenyellow;
 }
 
 input:focus {
@@ -76,9 +90,16 @@ button {
   font-weight: 700;
   cursor: pointer;
   margin-left: 0.5rem;
+  font-family: Courier;
   &:hover {
     background: black;
     color: white;
   }
+}
+
+.highlight {
+  min-width: 20px;
+  height: 2rem;
+  background-color: greenyellow;
 }
 </style>
